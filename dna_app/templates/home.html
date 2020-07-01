@@ -1,0 +1,25 @@
+<div class="col-md-4">
+    <h2>DNA Sequence Searcher</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+    </form>
+    <p>{{ result }}</p>
+    <br>
+    <h2>Search Results:</h2>
+    <table>
+        <tr>
+    <!--        <th>Time</th>  -->
+            <th>Sequence</th>
+            <th>Result</th>
+        </tr>
+        {% for row in searches %}
+        <tr> 
+    <!--        <td>{{ row.time }}</td>  -->
+            <td>{{ row.seq }}</td>
+            <td>{{ row.result }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
