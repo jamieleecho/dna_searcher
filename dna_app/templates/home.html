@@ -1,11 +1,11 @@
 <div class="col-md-4">
     <h2>DNA Sequence Searcher</h2>
+    <meta http-equiv="refresh" content="10;url=/">    
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit">
     </form>
-    <p>{{ result }}</p>
     <br>
     <h2>Search Results:</h2>
     <table>
@@ -17,7 +17,7 @@
         {% for row in searches %}
         <tr> 
     <!--        <td>{{ row.time }}</td>  -->
-            <td>{{ row.seq }}</td>
+            <td>{{ row.seq }}  </td>
             <td>{{ row.result }}</td>
         </tr>
         {% endfor %}

@@ -19,4 +19,6 @@ from . import views
 
 urlpatterns = [
     path('',views.home_view),
+    path('search_results',views.home_iframe),
+    
 ]

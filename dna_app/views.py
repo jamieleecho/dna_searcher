@@ -1,43 +1,36 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-
 from .forms import SeqenceForm
 from .models import SequenceModel
-from .services import find_seq #SearchDNA, 
-
-from .tasks import process_seq, sleepy
-
-from django_celery_results.models import TaskResult
+from .services import find_seq
+from .tasks import process_seq
 
 NUM_SEARCH_HISTORY = 20
 # Create your views here.
 
 def home_view(request):
-    """sleepy.delay(10)
-    tasks = TaskResult.objects.all()
-    print(tasks)
-    return HttpResponse('Done')"""
+    #return clear_data()  #uncomment to delete prior searches then recomment!
     form = SeqenceForm(request.POST or None)
-    search_result = ''
-    
-    tasks = TaskResult.objects.all()
-    #print(tasks[22].result)
-    #print(process_seq.AsyncResult('f75e15f0-bea2-443a-becf-99d053faa598').status)
     
     if form.is_valid():
         seq = ''.join(form.cleaned_data['seq'].upper().split()) #remove newlines and spaces
-        print(seq)
         form.seq = seq
 
         form_instance = form.save()
         process_seq.delay(seq,form_instance.id)
-        #print(task_id)
         form = SeqenceForm()
         return HttpResponseRedirect('/')
         
     
-    searches = SequenceModel.objects.all()[::-1][:NUM_SEARCH_HISTORY]
-    
-    args = {'form':form, 'result':search_result, 'searches':searches}
-    
+    searches = SequenceModel.objects.all()[::-1][:NUM_SEARCH_HISTORY]   
+    args = {'form':form, 'searches':searches}    
     return render(request, 'home.html',  args)
+
+def home_iframe(request):
+    searches = SequenceModel.objects.all()[::-1][:NUM_SEARCH_HISTORY]    
+    args = {'searches':searches}    
+    return render(request, 'iframe.html',  args)
+
+def clear_data():
+    SequenceModel.objects.all().delete()
+    return HttpResponse('Deleted Data') 

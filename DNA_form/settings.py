@@ -38,16 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'dna_app',
-    'django_celery_results',
-    #'service_objects',
-    #'djcelery',
-    #'kombu.transport.django',
 ]
-"""import djcelery
-djcelery.setup_loader()
-BROKER_URL = "django://"
-"""
-CELERY_RESULT_BACKEND = 'django-db'
+
 
 
 MIDDLEWARE = [
@@ -129,7 +121,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-"""CELERY_BROKER_URL = ''
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_TASK_SERIALIZER = 'json'"""
