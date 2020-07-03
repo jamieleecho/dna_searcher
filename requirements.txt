@@ -44,7 +44,7 @@ decorator==4.4.2
 defusedxml==0.6.0
 diff-match-patch==20181111
 distributed @ file:///opt/concourse/worker/volumes/live/e43ee530-1b45-4758-53f0-c8e8f8e0897e/volume/distributed_1592842519630/work
-Django==3.0.3
+Django==3.0.7
 django-celery-results==1.2.1
 docutils==0.16
 entrypoints==0.3
